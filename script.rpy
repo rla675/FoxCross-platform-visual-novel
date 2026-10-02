@@ -51,25 +51,26 @@ screen manner_overlay():
 init python:
     renpy.music.register_channel("ambient", mixer="sfx", loop=True)
 
-define config.has_sound = True
+# config.has_sound 중복 선언 제거 (options.rpy 46줄과 충돌 방지)
 default preferences.sfx_volume = 1.0
 
-# 오디오 및 이미지 에셋
+# 오디오 및 이미지 에셋 (에러 방지를 위해 모두 .mp3 로 통일)
 define audio.bgm_main = "audio/bgm/bgm.mp3"
 define audio.bgm_daily = "audio/bgm/bgm1.mp3"
 define audio.bgm_sad = "audio/bgm/bgm2.mp3"
 define audio.bgm_wafu = "audio/bgm/bgm3.mp3"
-define audio.bgm_noct = "audio/bgm/bgm_noct.mp3"
+# define audio.bgm_noct = "audio/bgm/bgm_noct.mp3" # 파일 부재로 임시 주석 처리
 
 define audio.sfx_door = "audio/sfx/sfx_door.mp3"
 define audio.sfx_bell = "audio/sfx/sfx_bell.mp3"
 define audio.sfx_hit = "audio/sfx/sfx_hit.mp3"
 define audio.sfx_crash = "audio/sfx/sfx_crash.mp3"
 define audio.sfx_magic = "audio/sfx/sfx_magic.mp3"
-# 추가된 효과음 선언 (구조 통일 및 에러 방지용)
-define audio.sfx_vanish = "audio/sfx/vanish.mp3"
-define audio.sfx_rustle = "audio/sfx/rustle.mp3"
-define audio.sfx_rain_loop = "audio/sfx/rain_loop.mp3"
+
+# 찾을 수 없는 파일들 오류 방지 (임시 주석 처리)
+# define audio.sfx_vanish = "audio/sfx/vanish.mp3"
+# define audio.sfx_rustle = "audio/sfx/rustle.mp3"
+# define audio.sfx_rain_loop = "audio/sfx/rain_loop.mp3"
 
 # 캐릭터 정의 (기존 스크립트 변수 유지)
 define h = Character("서로아", color="#FF4D4D")
@@ -173,7 +174,7 @@ label start:
 
     m "하..."
     "(어이가 없어서 말도 안 나온다. 악마다운 위압감은커녕, 당장이라도 쓰러질 듯 파들거리는 저 뿔을 보니 사람을 해칠 악독한 마물 같지는 않은데...)"
-    "무엇보다, 그녀의 잘게 떨리는 작은 어깨를 보고 있자니 가문에서 내쳐져 처음 이 싸늘한 방에 들어왔을 때의 내 모습이 겹쳐 보였다. 지독하게 춥고, 배고프고, 뼈저리게 외로웠던 그날의 기억이."
+    "무엇보다, 그녀의 잘게 떨리는 작은 어깨를 보고 있자니 가문에서 내쳐져 처음 이 싸늘한 방에 들어왔을 때의 내 모습이 겹쳐 보였다. 지독하게 춥고, 배고프고, 뼛속까지 외로웠던 그날의 기억이."
     "나는 주머니에 넣었던 손을 천천히 빼며 한숨을 깊게 내쉬었다. 어차피 잃을 것도 없는 인생이다."
 
     m "좋습니다. 단, 몇 가지 규칙이 있습니다."
@@ -401,7 +402,7 @@ label ch02_job_search:
     
     m "됐습니다. 입에 발린 위로 안 해줘도 돼요. 저같이 사람 눈도 제대로 못 마주치고 버벅거리는 음침한 놈을 누가 자기 가게 카운터에 세우겠어요."
 
-    "겉으로는 무덤덤하게 말했지만, 가슴 한구석이 쌉싸름하게 저려왔다. 역시 내 존재는 잘난 가문에서도, 이 평범한 세상의 작은 편의점에서조차도 쓸모없는 걸까..."
+    "겉로는 무덤덤하게 말했지만, 가슴 한구석이 쌉싸름하게 저려왔다. 역시 내 존재는 잘난 가문에서도, 이 평범한 세상의 작은 편의점에서조차도 쓸모없는 걸까..."
 
     play sound sfx_hit
     "지잉-! 지잉-!"
@@ -506,7 +507,7 @@ label ch03_night_shift:
 
     "후루룩- 마지막 국물 한 방울까지 깨끗하게 비운 로아가 배를 통통 두드리며 만족스러운 한숨을 쉬었다."
 
-    h "하아... 잘 먹었다! 역시 혼자 먹는 것보다 너랑 같이 먹는 게 제일 맛있어."
+    h "하아... 잘 먹었다! 역시 혼자 먹는 것보다 너랑 같이 먹는 제일 맛있어."
     m "뜨거운 물도 제대로 안 끓여왔으면서 생색은..."
 
     "나는 퉁명스럽게 말하며 다 먹은 라면 용기를 쓰레기통에 반듯하게 정돈했다. 그리고 덤덤하게 로아의 옆자리에 앉아 뻣뻣하게 굳은 다리를 길게 뻗었다."
@@ -544,7 +545,7 @@ label ch03_night_shift:
 
     m "(...이 바보 같은 녀석, 자기도 모르게 나를 해칠까 봐 덜덜 떨면서 두려워하고 있어.)"
 
-    "나는 꽉 쥐고 있던 주먹을 풀고, 내 가슴팍에 올려진 로아의 얼음장같이 차가운 손을 조심스럽게 감싸 쥐었다."
+    "나는 꽉 쥐고 있던 주먹을 풀고, 내 가슴팍에 올려진 로아의 얼음장같이 차가운 손 조심스럽게 감싸 쥐었다."
 
     m "로아 씨."
     
@@ -1047,7 +1048,7 @@ label ch08_first_fight:
     j "어...?!"
     "스윽-"
 
-    "하진이가 미처 방어 진을 전개하기도 전, 내 손가락 사이에 끼워진 빛나는 부적이 하진이의 가녀린 목덜미에 서늘하게 닿았다."
+    "하진이가 미처 방어 진 전개하기도 전, 내 손가락 사이에 끼워진 빛나는 부적이 하진이의 가녀린 목덜미에 서늘하게 닿았다."
     "단 1cm. 내가 손목에 힘을 조금만 더 주었더라면, 천재 퇴마사라 불리는 내 동생의 기맥은 그 자리에서 완전히 타들어가 끊어졌을 것이다."
 
     m "...승부는 끝났다."
@@ -1275,7 +1276,8 @@ label ch14_purify:
     "단전에서부터 맑고 따뜻한 황금빛 마력을 부드럽게 끌어올려, 녀석의 상처 입은 몸통 안으로 아주 천천히 흘려보냈다."
     "악한 기운을 도륙하고 태워버리는 폭력적인 공격이 아닌, 춥고 외로운 영혼을 온전히 보듬는 순수한 '정화(淨化)'의 빛."
 
-    play sound sfx_magic
+    # 임시 주석 처리
+    # play sound sfx_magic 
     "파아아앗-!"
 
     "어두운 골목길을 환하게 밝히는 눈부신 황금빛 속에서, 요괴의 흉측하고 기괴했던 몸집이 맑고 투명한 빛의 입자로 아름답게 변해갔다."
@@ -1341,7 +1343,8 @@ label ch17_runaway:
     "나는 겉옷도 제대로 챙겨 입지 못한 채, 우산도 없이 미친 듯이 문을 박차고 밖으로 튀어 나갔다."
 
     scene bg_street_rain with fade
-    play ambient sfx_rain_loop fadein 1.0
+    # 임시 주석 처리
+    # play ambient sfx_rain_loop fadein 1.0
     play music bgm_sad fadein 1.0
 
     "억수같이 퍼붓는 장대비 속. 시야가 빗물에 가려 한 치 앞도 보이지 않았다."
@@ -1368,7 +1371,8 @@ label ch17_runaway:
     h "바보... 멍청이... 나도 하랑이 없으면 안 된단 말이야... 네가 해주는 밥 안 먹으면 살 수 없단 말이야..."
     "우리는 차가운 빗속에서, 서로의 체온을 나누며 절대 손을 놓지 않겠다는 다짐을 뼛속 깊이 새기며 집으로 돌아왔다."
 
-    stop ambient fadeout 1.0
+    # 임시 주석 처리
+    # stop ambient fadeout 1.0
     jump ch18_final_battle
 
 label ch18_final_battle:
@@ -1510,14 +1514,16 @@ label ending_normal:
     h "응! 꼭 올게. 무슨 일이 있어도, 늦어도 진짜 진짜 빨리 뛰어올게!"
     h "바람피우지 말고 얌전히 기다려야 해, 우리 츤데레 짠돌이!"
 
-    play sound sfx_vanish
+    # 임시 주석 처리
+    # play sound sfx_vanish 
     "파아앗-"
     "짧고 애틋한, 숨결이 닿는 입맞춤과 함께, 로아의 모습이 아름다운 붉은빛으로 부서지며 허공으로 아스라이 사라졌다."
     
     hide roa with dissolve
 
     scene bg_room_sunset with fade
-    play music bgm_noct fadein 2.0
+    # 임시 주석 처리
+    # play music bgm_noct fadein 2.0
     pause 1.0
 
     "그로부터 1년 뒤."
@@ -1528,7 +1534,8 @@ label ending_normal:
 
     m "다녀왔어."
 
-    play sound sfx_rustle
+    # 임시 주석 처리
+    # play sound sfx_rustle 
     "방 한구석에 얌전히 놓여 있던 여우 인형의 꼬리가, 바람도 없는데 아주 미세하게 흔들린 것 같은 기분이 들었다."
     "그리고, 1년 동안 단 한 번도 맡지 못했던 아주 달콤하고 따뜻한 그리운 마기의 향기가 코끝을 스쳤다."
     "나의 길고 외로웠던 기다림이 마침내 끝날 날이... 머지않은 것 같다."
