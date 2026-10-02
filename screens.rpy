@@ -963,10 +963,7 @@ style history_label_text:
     xalign 0.5
 
 
-## Help 스크린 ####################################################################
-##
-## 입력장치의 기능을 설명합니다. 각 입력장치별 설정은 keyboard_help, mouse_help,
-## gamepad_help 스크린을 각각 불러와서 출력합니다.
+## 도움말 화면 (메인 메뉴 / 인게임 메뉴 연동) ##################################
 
 screen help():
 
@@ -974,20 +971,23 @@ screen help():
 
     default device = "keyboard"
 
-    use game_menu(_("조작방법"), scroll="viewport"):
+    use game_menu(_("도움말"), scroll="viewport"):
 
         style_prefix "help"
 
         vbox:
-            spacing 23
+            spacing 15
 
             hbox:
+                spacing 15
 
                 textbutton _("키보드") action SetScreenVariable("device", "keyboard")
                 textbutton _("마우스") action SetScreenVariable("device", "mouse")
 
                 if GamepadExists():
                     textbutton _("게임패드") action SetScreenVariable("device", "gamepad")
+
+            null height 15
 
             if device == "keyboard":
                 use keyboard_help
@@ -997,108 +997,188 @@ screen help():
                 use gamepad_help
 
 
+## 키보드 도움말 ###############################################################
+
 screen keyboard_help():
 
-    hbox:
-        label _("엔터(Enter)")
-        text _("대사 진행 및 UI (선택지 포함) 선택.")
+    vbox:
+        spacing 12
 
-    hbox:
-        label _("스페이스(Space)")
-        text _("대사를 진행하되 선택지는 선택하지 않음.")
+        hbox:
+            spacing 15
+            text _("엔터(Enter)") min_width 280
+            text _("대사 진행 및 UI (선택지 포함) 선택.")
 
-    hbox:
-        label _("화살표 키")
-        text _("UI 이동.")
+        hbox:
+            spacing 15
+            text _("스페이스(Space)") min_width 280
+            text _("대사를 진행하되 선택지는 선택하지 않음.")
 
-    hbox:
-        label _("이스케이프(Esc)")
-        text _("게임 메뉴 불러옴.")
+        hbox:
+            spacing 15
+            text _("화살표 키") min_width 280
+            text _("선택지 및 UI 이동.")
 
-    hbox:
-        label _("컨트롤(Ctrl)")
-        text _("누르고 있는 동안 대사를 스킵.")
+        hbox:
+            spacing 15
+            text _("이스케이프(Esc)") min_width 280
+            text _("게임 메뉴 불러옴 / 취소.")
 
-    hbox:
-        label _("탭(Tab)")
-        text _("대사 스킵 토글.")
+        hbox:
+            spacing 15
+            text _("컨트롤(Ctrl)") min_width 280
+            text _("누르고 있는 동안 대사를 고속 스킵.")
 
-    hbox:
-        label _("페이지 업(Page Up)")
-        text _("이전 대사로 롤백.")
+        hbox:
+            spacing 15
+            text _("탭(Tab)") min_width 280
+            text _("긴급 매너모드 (화면 및 음성 숨김).")
 
-    hbox:
-        label _("페이지 다운(Page Down)")
-        text _("이후 대사로 롤포워드.")
+        hbox:
+            spacing 15
+            text _("페이지 업(Page Up)") min_width 280
+            text _("이전 대사로 롤백 (되감기).")
 
-    hbox:
-        label "H"
-        text _("UI를 숨김.")
+        hbox:
+            spacing 15
+            text _("페이지 다운(Page Down)") min_width 280
+            text _("이후 대사로 롤포워드 (앞으로 감기).")
 
-    hbox:
-        label "S"
-        text _("스크린샷 저장.")
+        hbox:
+            spacing 15
+            text "H" min_width 280
+            text _("UI를 숨김 (대사창 가리기).")
 
-    hbox:
-        label "V"
-        text _("{a=https://www.renpy.org/l/voicing}대사 읽어주기 기능{/a} 토글.")
+        hbox:
+            spacing 15
+            text "S" min_width 280
+            text _("스크린샷 저장.")
 
-    hbox:
-        label "Shift+A"
-        text _("접근성 메뉴를 엽니다.")
+        hbox:
+            spacing 15
+            text "V" min_width 280
+            text _("보이스 토글 / 대사 읽어주기 기능.")
 
+        hbox:
+            spacing 15
+            text "Shift+A" min_width 280
+            text _("접근성 메뉴를 엽니다.")
+
+
+## 마우스 도움말 ###############################################################
 
 screen mouse_help():
 
-    hbox:
-        label _("클릭")
-        text _("대사 진행 및 UI (선택지 포함) 선택.")
+    vbox:
+        spacing 12
 
-    hbox:
-        label _("가운데 버튼이나 휠버튼 클릭")
-        text _("UI를 숨김.")
+        hbox:
+            spacing 15
+            text _("좌클릭") min_width 280
+            text _("대사 진행 및 UI (선택지 포함) 선택.")
 
-    hbox:
-        label _("우클릭")
-        text _("게임 메뉴 불러옴.")
+        hbox:
+            spacing 15
+            text _("우클릭") min_width 280
+            text _("게임 메뉴 불러옴 / 취소.")
 
-    hbox:
-        label _("휠 위로")
-        text _("이전 대사로 롤백.")
+        hbox:
+            spacing 15
+            text _("가운데 버튼이나 휠버튼 클릭") min_width 280
+            text _("UI를 숨김.")
 
-    hbox:
-        label _("휠 아래로")
-        text _("이후 대사로 롤포워드.")
+        hbox:
+            spacing 15
+            text _("휠 위로") min_width 280
+            text _("이전 대사로 롤백.")
 
+        hbox:
+            spacing 15
+            text _("휠 아래로") min_width 280
+            text _("이후 대사로 롤포워드.")
+
+
+## 게임패드 도움말 #############################################################
 
 screen gamepad_help():
 
-    hbox:
-        label _("오른쪽 트리거(RT)\nA버튼/아래 버튼")
-        text _("대사 진행 및 UI (선택지 포함) 선택.")
+    vbox:
+        spacing 12
 
-    hbox:
-        label _("왼쪽 트리거\n왼쪽 어깨")
-        text _("이전 대사로 롤백.")
+        hbox:
+            spacing 15
+            text _("A 버튼") min_width 280
+            text _("대사 진행 및 선택지 선택.")
 
-    hbox:
-        label _("오른쪽 범퍼(RB)")
-        text _("이후 대사로 롤포워드.")
+        hbox:
+            spacing 15
+            text _("B 버튼") min_width 280
+            text _("스크롤 및 확인.")
 
-    hbox:
-        label _("D-Pad, 아날로그 스틱")
-        text _("UI 이동.")
+        hbox:
+            spacing 15
+            text _("X 버튼") min_width 280
+            text _("긴급 매너모드.")
 
-    hbox:
-        label _("Start, Guide, B/Right Button")
-        text _("게임 메뉴 불러옴.")
+        hbox:
+            spacing 15
+            text _("Y 버튼") min_width 280
+            text _("UI를 숨김 (대사창 가리기).")
 
-    hbox:
-        label _("Y버튼/위 버튼")
-        text _("UI를 숨김.")
+        hbox:
+            spacing 15
+            text _("오른쪽 범퍼 (RB)") min_width 280
+            text _("이후 대사로 롤포워드 (대사 넘김).")
 
-    textbutton _("조정") action GamepadCalibrate()
+        hbox:
+            spacing 15
+            text _("왼쪽 범퍼 (LB)") min_width 280
+            text _("보이스 / 자동 재생 토글.")
 
+        hbox:
+            spacing 15
+            text _("방향 패드 (D-Pad)") min_width 280
+            text _("선택지 및 UI 이동.")
+
+        hbox:
+            spacing 15
+            text _("메뉴 버튼") min_width 280
+            text _("게임 메뉴 불러옴 / 취소 (Esc).")
+
+        hbox:
+            spacing 15
+            text _("뷰 버튼") min_width 280
+            text _("스팀 클립 만들기.")
+
+        hbox:
+            spacing 15
+            text _("오른쪽 스틱 클릭 (R3)") min_width 280
+            text _("한 손 조작 대사 진행.")
+
+        # 스팀 인풋 공식 레이아웃을 쓰므로 렌파이 순정 보정 버튼은 주석 처리
+        # textbutton _("조정") action GamepadCalibrate()
+
+style confirm_frame is gui_frame
+style confirm_prompt is gui_prompt
+style confirm_prompt_text is gui_prompt_text
+style confirm_button is gui_medium_button
+style confirm_button_text is gui_medium_button_text
+
+style confirm_frame:
+    background Frame([ "gui/confirm_frame.png", "gui/frame.png"], gui.confirm_frame_borders, tile=gui.frame_tile)
+    padding gui.confirm_frame_borders.padding
+    xalign .5
+    yalign .5
+
+style confirm_prompt_text:
+    textalign 0.5
+    layout "subtitle"
+
+style confirm_button:
+    properties gui.button_properties("confirm_button")
+
+style confirm_button_text:
+    properties gui.text_properties("confirm_button")
 
 style help_button is gui_button
 style help_button_text is gui_button_text
